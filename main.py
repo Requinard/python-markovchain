@@ -16,4 +16,4 @@ if __name__ == '__main__':
         brain.learn(
             "Served 30 months in Florida at age 18...food was terrible, boredom is mind numbing, the feeling that the world is leaving you behind is quite painful...perhaps the worst of it though is the stigma associated with being a convicted felon. I have been turned down twice for jobs I am capable of excelling at (former space coast area Machinist now living in oil country). Problem is, I am totally honest with them and the convictions are 25 years old.")
 
-    brain.save()
+    print brain.respond("Prison terms need to at least consider why a person did something. It's so fucked that his uncle killed those people drunk driving, but he obviously didn't intend to.")
