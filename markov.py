@@ -115,7 +115,7 @@ class Brain():
                 return True
             return False
         except Exception:
-            return Fals
+            return False
 
     def respond(self, sentence):
         """
