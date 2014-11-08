@@ -15,18 +15,18 @@ or in technical notation
 
 Int is the probability that a word will follow
 """
+import pickle
 
-
-class MarkovBrain():
+class Brain():
     def __init__(self):
         self.keyValue = {}
         self.unusedItems = ['!', '?', '.']
 
     def learn(self, sentence):
         """
-        Incorporates a complete sentence into the dictionairy
-        :param sentence:
-        :return:
+        Incorporates a complete sentence into the dictionary
+        :param sentence: Sentence that you want added to the markov brain
+        :return: Success
         """
         words = sentence.split(" ")
 
@@ -63,6 +63,8 @@ class MarkovBrain():
                 if item in completed_key:
                     print("Mark removed: {}".format(item))
                     completed_key.replace(item, "")
+                if item in supplement_word:
+                    supplement_word.replace(item, "")
 
             # Manage existing keywords
             if self.keyValue.has_key(completed_key):
@@ -70,16 +72,31 @@ class MarkovBrain():
                 responses = self.keyValue[completed_key]
 
                 if supplement_word in responses.keys():
-                    print "Updating supplement word {2} from {0} to {1}".format(responses[completed_key], responses[completed_key] + 1, responses[supplement_word])
-                    responses[completed_key] += 1
+                    print "Updating supplement word {0} from {1} to {2}".format(supplement_word,
+                                                                                str(responses[supplement_word]),
+                                                                                str(responses[supplement_word]+ 1))
+                    responses[supplement_word] += 1
                 else:
                     print "Adding supplement key {0} at value 1"
                     responses[completed_key] = 1
             # Manage non-existing keywords
             else:
-                print "Adding key {0} to dictionary with supplement {1} at value 1".format(completed_key, supplement_word)
+                print "Adding key {0} to dictionary with supplement {1} at value 1".format(completed_key,
+                                                                                           supplement_word)
                 key = self.keyValue
 
                 key[completed_key] = {supplement_word: 1}
 
+        self.save()
+
         return True
+
+    def save(self):
+        pickle.dump(self.keyValue, open("brain.dump", "w+"))
+        print "Successfully saved file"
+
+    def load(self):
+        var = pickle.load(open("brain.dump", "r"))
+        if var != None:
+            print "Successfully loaded file"
+            self.keyValue = var
