@@ -135,14 +135,16 @@ class Brain():
         full_response = completed_seed
 
         while True:
-            total_possibility = 1
+            possibilities_weighted = []
+            possible_responses = {}
             loop_completed_seed = "{0} {1}".format(loop_word_one, loop_word_two)
 
+            # If the possible response throws an exception, we have no words to follow that up with. We then end the sentence
             try:
                 possible_responses = self.keyValue[loop_completed_seed]
             except:
-                return (full_response + ".").capitalise()
-            possibilities_weighted = []
+                return (full_response + ".").capitalize()
+
 
             # Add all repsonses to a list equal to the amount of times it has appeared
             for response in possible_responses.keys():
@@ -152,11 +154,14 @@ class Brain():
             # Chose a random value from the dictionairy
             chosen_response = possibilities_weighted[random.randint(0, len(possibilities_weighted)-1)]
 
+            # Append chosen part to the new full response
             full_response += " " + chosen_response
 
+            # If we have a dot in our sentence, we have found an end. Return the sentence
             if "." in chosen_response:
                 return full_response.capitalize()
 
+            # If we're still here, we swap the words around to generate the next word
             loop_word_one = loop_word_two
             loop_word_two = chosen_response
 
