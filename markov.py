@@ -95,16 +95,34 @@ class Brain():
         return True
 
     def save(self):
+        """
+        Saves the brain keyvalue stores to a brain.dump file
+        :return:
+        """
         pickle.dump(self.keyValue, open("brain.dump", "w+"))
         print "Successfully saved file"
 
     def load(self):
-        var = pickle.load(open("brain.dump", "r"))
-        if var != None:
-            print "Successfully loaded file"
-            self.keyValue = var
+        """
+        Loads the brain keyvalue strores from a brain.dump file
+        :return: Success of operation
+        """
+        try:
+            var = pickle.load(open("brain.dump", "r"))
+            if var != None:
+                print "Successfully loaded file"
+                self.keyValue = var
+                return True
+            return False
+        except Exception:
+            return Fals
 
     def respond(self, sentence):
+        """
+        Tries to respond to a specific sentence
+        :param sentence: Sentence you want a response to
+        :return: Sentence that is a direct response to input sentence
+        """
         words = sentence.split(" ")
         completed_seed = ""
         seed_one = ""
