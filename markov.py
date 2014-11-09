@@ -19,6 +19,7 @@ import pickle
 import random
 import datetime
 
+
 class Brain():
     def __init__(self):
         self.keyValue = {}
@@ -77,7 +78,7 @@ class Brain():
                 if supplement_word in responses.keys():
                     print "Updating supplement word {0} from {1} to {2}".format(supplement_word,
                                                                                 str(responses[supplement_word]),
-                                                                                str(responses[supplement_word]+ 1))
+                                                                                str(responses[supplement_word] + 1))
                     responses[supplement_word] += 1
                 else:
                     print "Adding supplement key {0} at value 1"
@@ -133,7 +134,7 @@ class Brain():
         while True:
             try:
                 seed_one = words[i]
-                seed_two = words[i+1]
+                seed_two = words[i + 1]
                 completed_seed = (seed_one + " " + seed_two).lower()
 
                 if completed_seed in self.keyValue.keys():
@@ -141,7 +142,7 @@ class Brain():
 
                 i += 1
             except Exception:
-                completed_seed = self.keyValue.keys()[random.randint(0, len(self.keyValue.keys())-1)]
+                completed_seed = self.keyValue.keys()[random.randint(0, len(self.keyValue.keys()) - 1)]
                 seed_one = completed_seed.split(" ")[0]
                 seed_two = completed_seed.split(" ")[1]
                 break
@@ -170,7 +171,7 @@ class Brain():
                     possibilities_weighted.append(response)
 
             # Chose a random value from the dictionairy
-            chosen_response = possibilities_weighted[random.randint(0, len(possibilities_weighted)-1)]
+            chosen_response = possibilities_weighted[random.randint(0, len(possibilities_weighted) - 1)]
 
             # Append chosen part to the new full response
             full_response += " " + chosen_response
