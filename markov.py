@@ -23,7 +23,7 @@ import datetime
 class Brain():
     def __init__(self):
         self.keyValue = {}
-        self.unusedItems = ['!', '?', '.', ',', "..."]
+        self.unusedItems = ['!', '?', '.', ',', "...", '(', ')', '{', '}', '[', "]", '<', '>']
         self.random = random.seed(datetime.datetime.now())
 
     def learn(self, sentence):
